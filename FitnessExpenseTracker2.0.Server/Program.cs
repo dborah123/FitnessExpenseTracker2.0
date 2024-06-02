@@ -1,3 +1,6 @@
+using FitnessExpenseTracker;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,3 +23,14 @@ app.MapControllers();
 app.MapFallbackToFile("/index.html");
 
 app.Run();
+
+// Seed DB
+builder.Services.AddTransient<DBSeeder>();
+
+using var scope = app.Services.CreateScope();
+
+var services = scope.ServiceProvider;
+
+var initialiser = services.GetRequiredService<DBSeeder>();
+
+initialiser.Run();

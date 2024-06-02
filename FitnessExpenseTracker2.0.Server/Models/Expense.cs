@@ -1,6 +1,4 @@
-﻿using IO.Swagger.Model;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
+﻿
 namespace FitnessExpenseTracker.Models
 {
     /// <summary>
@@ -25,12 +23,12 @@ namespace FitnessExpenseTracker.Models
         private string name;
         private double amount;
         private ExpenseType expenseType;
-        private Date purchaseDate;
-        private DetailedActivity? linkedActivity;
-        private SportType sportsType;
+        private DateTime purchaseDate;
+        private string? linkedActivity;
+        private SportType? sportsType;
 
         #region Constructors
-        private Expense(string? name, double amount, ExpenseType expenseType, Date purchaseDate)
+        public Expense(string? name, double amount, ExpenseType expenseType, DateTime purchaseDate)
         {
             this.amount = amount;
             this.expenseType = expenseType;
@@ -48,16 +46,16 @@ namespace FitnessExpenseTracker.Models
 
         }
 
-        public Expense(string? name, double amount, ExpenseType expenseType, Date purchaseDate, DetailedActivity activity) 
+        public Expense(string? name, double amount, ExpenseType expenseType, DateTime purchaseDate, string activity, SportType sportType) 
             : this(name, amount, expenseType, purchaseDate)
         {
             this.linkedActivity = activity;
-            this.sportsType = linkedActivity.SportType;
+            this.sportsType = sportType;
         }
         #endregion
 
         #region Helper functions
-        private string GenerateExpenseName(ExpenseType expenseType, Date purchaseDate)
+        private string GenerateExpenseName(ExpenseType expenseType, DateTime purchaseDate)
         {
             string expenseTypeName;
             if (expenseType == ExpenseType.Other)
@@ -69,7 +67,7 @@ namespace FitnessExpenseTracker.Models
                 expenseTypeName = expenseType.ToString();
             }
 
-            return string.Format("{0} at {1}", expenseTypeName, purchaseDate);
+            return string.Format("{0} at {1}", expenseTypeName, purchaseDate.Date.ToString("dd/MM/yyyy"));
         }
         #endregion
     }

@@ -1,9 +1,13 @@
-﻿using IO.Swagger.Api;
-using IO.Swagger.Model;
+﻿
 
 
 namespace FitnessExpenseTracker.Models
 {
+    public enum SportType
+    {
+        Skiing,
+        Biking
+    };
     public class Activity
     {
 
