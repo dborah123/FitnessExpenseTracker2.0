@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+/*
 namespace ASPNETCoreIdentityDemo.Models
 {
     public class RegisterViewModel
@@ -17,4 +17,4 @@ namespace ASPNETCoreIdentityDemo.Models
         [Compare("Password", ErrorMessage = "Password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
-}
+}*/

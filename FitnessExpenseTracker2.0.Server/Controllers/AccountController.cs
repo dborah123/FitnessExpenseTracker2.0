@@ -1,4 +1,4 @@
-﻿using ASPNETCoreIdentityDemo.Models;
+﻿/*using ASPNETCoreIdentityDemo.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -61,4 +61,4 @@ namespace ASPNETCoreIdentityDemo.Controllers
             return View(model);
         }
     }
-}
+}*/

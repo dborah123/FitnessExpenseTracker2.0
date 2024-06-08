@@ -1,4 +1,8 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
 namespace FitnessExpenseTracker.Models
 {
     /// <summary>
@@ -18,16 +22,20 @@ namespace FitnessExpenseTracker.Models
     /// <summary>
     /// Class the represents an expense
     /// </summary>
+    [Table("Expenses")]
     public class Expense
     {
-        private string name;
-        private double amount;
-        private ExpenseType expenseType;
-        private DateTime purchaseDate;
-        private string? linkedActivity;
-        private SportType? sportsType;
+        [Key]
+        public int Id { get; set; }
+        public string name { get; set; }
+        public double amount { get; set; }
+        public ExpenseType expenseType { get; set; }
+        public DateTime purchaseDate { get; set; }
+        public string? linkedActivity { get; set; }
+        public SportType? sportsType { get; set; }
 
         #region Constructors
+        /*
         public Expense(string? name, double amount, ExpenseType expenseType, DateTime purchaseDate)
         {
             this.amount = amount;
@@ -51,7 +59,7 @@ namespace FitnessExpenseTracker.Models
         {
             this.linkedActivity = activity;
             this.sportsType = sportType;
-        }
+        }*/
         #endregion
 
         #region Helper functions

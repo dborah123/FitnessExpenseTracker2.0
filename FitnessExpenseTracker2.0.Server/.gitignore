@@ -6,6 +6,10 @@
 Weather*.cs
 stravacodegen
 appsettings.json
+*.db
+Migrations
+.config
+database.db
 
 # dotenv files
 .env

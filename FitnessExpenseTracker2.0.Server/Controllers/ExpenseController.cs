@@ -1,13 +1,10 @@
-﻿using FitnessExpenseTracker.Models;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Data;
-using System.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.Sqlite;
+using System.Text.Json;
 
 namespace FitnessExpenseTracker.Controllers
 {
-    [Route("api/expense/[controller]")]
-    [ApiController]
+ 
     public class ExpenseController : Controller
     {
         public readonly IConfiguration configuration;
@@ -17,39 +14,36 @@ namespace FitnessExpenseTracker.Controllers
             this.configuration = configuration;
         }
 
-        [HttpGet]
-        [Route("GetAllExpenses")]
-        public String GetExpenses()
+        public string GetExpenses()
         {
-            SqlConnection connection = new SqlConnection(configuration.GetConnectionString("FitnessExpenseTrackerLocalDB").ToString());
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Expenses", connection);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+            string? configString = configuration.GetConnectionString("MyDb");
 
-            List<Expense> expenseList = new List<Expense>();
+           if (configString is null)
+           {
+                return "";
+           }
 
-            if (dt.Rows.Count > 0)
-            {
-                for (int i = 0; i < dt.Rows.Count; i++)
+           using (var connection = new SqliteConnection(configString))
+           {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText = @"SELECT * FROM Expenses";
+
+                using (var reader = command.ExecuteReader())
                 {
-                    double amount = Convert.ToInt32(dt.Rows[i]["Amount"]);
-                    ExpenseType expenseType = ExpenseType.Other;
-                    DateTime purchaseDate = Convert.ToDateTime(dt.Rows[i]["PurchaseData"]);
-
-                    Expense expense = new Expense("", amount, expenseType, purchaseDate);
-                    expenseList.Add(expense);
+                    while (reader.Read())
+                    {
+                        var x = reader.GetString(0);
+                    }
                 }
-            }
 
-            if (expenseList.Count > 0)
-            {
-                return JsonConvert.SerializeObject(expenseList);
-            }
-            else
-            {
-                Response.StatusCode = 100;
-                return JsonConvert.SerializeObject(Response);
-            }
+
+
+           }
+
+            return "";
+
         }
     }
 }
