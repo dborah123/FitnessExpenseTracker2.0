@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FitnessExpenseTracker;
 using FitnessExpenseTracker.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FitnessExpenseTracker2._0.Server.Controllers
 {
@@ -40,6 +41,21 @@ namespace FitnessExpenseTracker2._0.Server.Controllers
             }
 
             return expense;
+        }
+        // GET: api/Expenses/1234
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<List<Expense>>> GetExpenseForUser(int userId)
+        {
+            //var expense = _context.Expense.FromSql($"SELECT * FROMWHERE StravaUserID={userId}");
+
+            var expenseList = await _context.Database.SqlQuery<Expense>($"SELECT * FROM Expenses WHERE StravaUserID={userId}").ToListAsync();
+
+            if (expenseList.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return expenseList;
         }
 
         // PUT: api/Expenses/5
@@ -78,6 +94,11 @@ namespace FitnessExpenseTracker2._0.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Expense>> PostExpense(Expense expense)
         {
+            if (expense.Name == null)
+            {
+                expense.AutoGenerateExpenseName();
+            }
+
             _context.Expense.Add(expense);
             await _context.SaveChangesAsync();
 
