@@ -48,7 +48,7 @@ namespace FitnessExpenseTracker.Models
         {
             StringBuilder errorStringBuilder = new StringBuilder();
 
-            if (!this.IsNameValid())
+            if (!this.IsNameValid(allowNameGen))
             {
                 errorStringBuilder.Append(NameInvalid);
             }

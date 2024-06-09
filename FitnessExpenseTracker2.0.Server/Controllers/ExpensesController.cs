@@ -67,6 +67,11 @@ namespace FitnessExpenseTracker2._0.Server.Controllers
             {
                 return BadRequest();
             }
+            string errorString;
+            if (!expense.IsExpenseValid(out errorString))
+            {
+                BadRequest(errorString);
+            }
 
             _context.Entry(expense).State = EntityState.Modified;
 
@@ -94,9 +99,10 @@ namespace FitnessExpenseTracker2._0.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Expense>> PostExpense(Expense expense)
         {
-            if (expense.Name == null)
+            string errorString;
+            if (!expense.IsExpenseValid(out errorString, true))
             {
-                expense.AutoGenerateExpenseName();
+                BadRequest(errorString);
             }
 
             _context.Expense.Add(expense);

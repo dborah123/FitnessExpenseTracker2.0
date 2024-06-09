@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessExpenseTracker2.0.Server", "FitnessExpenseTracker2.0.Server\FitnessExpenseTracker2.0.Server.csproj", "{7EFE6098-E22F-4C2A-9377-930949E8364C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessExpenseTracker2.0.Server", "FitnessExpenseTracker2.0.Server\FitnessExpenseTracker2.0.Server.csproj", "{7EFE6098-E22F-4C2A-9377-930949E8364C}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "fitnessexpensetracker2.0.client", "fitnessexpensetracker2.0.client\fitnessexpensetracker2.0.client.esproj", "{A42598E9-3ABE-4E8C-ABF2-EFF82597CD58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFitnessExpenseTracker", "TestFitnessExpenseTracker\TestFitnessExpenseTracker.csproj", "{99945B9F-F167-434F-BA5B-18CA7AA01480}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{A42598E9-3ABE-4E8C-ABF2-EFF82597CD58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A42598E9-3ABE-4E8C-ABF2-EFF82597CD58}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A42598E9-3ABE-4E8C-ABF2-EFF82597CD58}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{99945B9F-F167-434F-BA5B-18CA7AA01480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99945B9F-F167-434F-BA5B-18CA7AA01480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99945B9F-F167-434F-BA5B-18CA7AA01480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99945B9F-F167-434F-BA5B-18CA7AA01480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
