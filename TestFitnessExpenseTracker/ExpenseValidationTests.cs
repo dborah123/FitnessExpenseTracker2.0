@@ -38,7 +38,7 @@ namespace TestFitnessExpenseTracker
             expense.Name = null;
 
             Assert.False(expense.IsExpenseValid(out errorString, false));
-            Assert.Equal(errorString, Expense.NameInvalid);
+            Assert.Equal(Expense.NameInvalid, errorString);
         }
         [Fact]
         public void InvalidStravaUserId()
@@ -49,7 +49,7 @@ namespace TestFitnessExpenseTracker
             expense.StravaUserID = null;
 
             Assert.False(expense.IsExpenseValid(out errorString, false));
-            Assert.Equal(errorString, Expense.StravaUserIDInvalid);
+            Assert.Equal(Expense.StravaUserIDInvalid, errorString);
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace TestFitnessExpenseTracker
             expense.Amount = -5.00;
 
             Assert.False(expense.IsExpenseValid(out errorString, false));
-            Assert.Equal(errorString, Expense.AmountInvalid);
+            Assert.Equal(Expense.AmountInvalid, errorString);
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace TestFitnessExpenseTracker
             expense.PurchaseDate = new DateTime(1999, 12, 31);
 
             Assert.False(expense.IsExpenseValid(out errorString, false));
-            Assert.Equal(errorString, Expense.PurchaseDateInvalid);
+            Assert.Equal(Expense.PurchaseDateInvalid, errorString);
         }
 
         [Fact]
@@ -85,7 +85,21 @@ namespace TestFitnessExpenseTracker
             expense.PurchaseDate = DateTime.Now.AddDays(1);
 
             Assert.False(expense.IsExpenseValid(out errorString, false));
-            Assert.Equal(errorString, Expense.PurchaseDateInvalid);
+            Assert.Equal(Expense.PurchaseDateInvalid, errorString);
+        }
+
+        [Fact]
+        public void MultiErrorString()
+        {
+            Expense expense = SetupHelper.GenerateValidExpense();
+            string errorString;
+
+            expense.PurchaseDate = DateTime.Now.AddDays(1);
+            expense.Amount = -17.00;
+
+            string expectedError = Expense.AmountInvalid + Expense.PurchaseDateInvalid;
+            Assert.False(expense.IsExpenseValid(out errorString, false));
+            Assert.Equal(expectedError, errorString);
         }
         #endregion
     }
