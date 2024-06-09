@@ -27,12 +27,14 @@ namespace FitnessExpenseTracker.Models
     {
         [Key]
         public int Id { get; set; }
-        public string name { get; set; }
-        public double amount { get; set; }
-        public ExpenseType expenseType { get; set; }
-        public DateTime purchaseDate { get; set; }
-        public string? linkedActivity { get; set; }
-        public SportType? sportsType { get; set; }
+        public string? Name { get; set; }
+        [Required]
+        public string? StravaUserID { get; set; }
+        public double Amount { get; set; }
+        public ExpenseType ExpenseType { get; set; }
+        public DateTime PurchaseDate { get; set; }
+        public string? LinkedActivity { get; set; }
+        public SportType? SportsType { get; set; }
 
         #region Constructors
         /*
@@ -63,7 +65,12 @@ namespace FitnessExpenseTracker.Models
         #endregion
 
         #region Helper functions
-        private string GenerateExpenseName(ExpenseType expenseType, DateTime purchaseDate)
+        public void  AutoGenerateExpenseName()
+        {
+            Name = GenExpenseName(ExpenseType, PurchaseDate);
+        }
+
+        private string GenExpenseName(ExpenseType expenseType, DateTime purchaseDate)
         {
             string expenseTypeName;
             if (expenseType == ExpenseType.Other)
