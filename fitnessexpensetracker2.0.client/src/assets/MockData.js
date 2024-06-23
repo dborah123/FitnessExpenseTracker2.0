@@ -561,3 +561,37 @@ export const MockActivity = {
     "total_photo_count": 0,
     "has_kudoed": false
 }
+
+export const MockExpenseList = [
+    {
+        "id": 3,
+        "name": "SeasonPass at 01/01/0001",
+        "stravaUserID": "1234",
+        "amount": 7.35,
+        "expenseType": 1,
+        "purchaseDate": "0001-01-01T00:00:00",
+        "linkedActivity": null,
+        "sportsType": null
+    },
+    {
+        "id": 4,
+        "name": "Equipment at 01/01/0001",
+        "stravaUserID": "1234",
+        "amount": 12,
+        "expenseType": 0,
+        "purchaseDate": "0001-01-01T00:00:00",
+        "linkedActivity": "123",
+        "sportsType": null
+    },
+]
+
+export const MockExpense = {
+    "id": 4,
+    "name": "Equipment at 01/01/0001",
+    "stravaUserID": "1234",
+    "amount": 12,
+    "expenseType": 0,
+    "purchaseDate": "0001-01-01T00:00:00",
+    "linkedActivity": "123",
+    "sportsType": null
+}

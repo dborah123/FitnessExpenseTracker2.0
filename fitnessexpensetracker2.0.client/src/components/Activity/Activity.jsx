@@ -22,6 +22,6 @@ export const Activity = props => {
 
 Activity.propTypes = {
     activity: PropTypes.shape({
-        activity: PropTypes.string
+        activity: PropTypes.object
     })
 };
