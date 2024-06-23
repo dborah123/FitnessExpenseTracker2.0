@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import './App.css';
 //import axios from 'axios';
 import { Activity } from './components/Activity/Activity'
+import { ActivityList } from './components/Activity/ActivityList'
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
         <div>
             <h1 id="tabelLabel">Fitness Expense Tracker</h1>
             <p>This component demonstrates fetching data from the server.</p>
-            <Activity/>
+            <ActivityList useMockData={true} />
         </div>
     );
     
