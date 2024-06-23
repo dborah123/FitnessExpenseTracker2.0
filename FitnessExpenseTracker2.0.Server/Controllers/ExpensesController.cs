@@ -42,13 +42,25 @@ namespace FitnessExpenseTracker2._0.Server.Controllers
 
             return expense;
         }
-        // GET: api/Expenses/1234
+        // GET: api/Expenses/user/1
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<List<Expense>>> GetExpenseForUser(int userId)
         {
-            //var expense = _context.Expense.FromSql($"SELECT * FROMWHERE StravaUserID={userId}");
-
             var expenseList = await _context.Database.SqlQuery<Expense>($"SELECT * FROM Expenses WHERE StravaUserID={userId}").ToListAsync();
+
+            if (expenseList.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return expenseList;
+        }
+
+        // GET: api/Expenses/activity/1
+        [HttpGet("activity/{activity}")]
+        public async Task<ActionResult<List<Expense>>> GetExpenseForActivity(string activity)
+        {
+            var expenseList = await _context.Database.SqlQuery<Expense>($"SELECT * FROM Expenses WHERE LinkedActivity={activity}").ToListAsync();
 
             if (expenseList.IsNullOrEmpty())
             {
