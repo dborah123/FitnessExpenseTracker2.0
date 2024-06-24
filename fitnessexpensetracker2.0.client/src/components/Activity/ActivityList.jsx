@@ -25,7 +25,7 @@ export const ActivityList = props => {
     return (
         <div>
             {activityList.map(activity => (
-                <div key={activity.Id}>
+                <div key={activity.id}>
                     <Activity activity={activity} />
                 </div>
             ))}
@@ -34,8 +34,6 @@ export const ActivityList = props => {
 }
 
 ActivityList.propTypes = {
-    useMockData: PropTypes.shape({
-        useMockData: PropTypes.Boolean
-    })
+    useMockData: PropTypes.bool
 };
 

@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import './App.css';
-//import axios from 'axios';
-import { Activity } from './components/Activity/Activity'
 import { ActivityList } from './components/Activity/ActivityList'
 
 function App() {
