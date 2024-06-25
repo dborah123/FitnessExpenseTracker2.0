@@ -62,7 +62,8 @@ export const MockActivityList =
         "pr_count": 42,
         "total_photo_count": 0,
         "has_kudoed": false
-    },
+        },
+    
     {
         "resource_state": 2,
         "athlete": {
@@ -208,7 +209,7 @@ export const MockExpenseList = [
         "amount": 12,
         "expenseType": 0,
         "purchaseDate": "0001-01-01T00:00:00",
-        "linkedActivity": "123",
+        "linkedActivity": "4",
         "sportsType": null
     },
 ]

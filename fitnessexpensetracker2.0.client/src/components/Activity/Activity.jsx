@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { ExpenseList } from '../Expense/ExpenseList';
 import { LuBike } from "react-icons/lu";
 import { FaSkiing } from "react-icons/fa";
+import { IconContext } from '../../../../node_modules/react-icons/lib/iconContext';
+import './activity.css'
 
 export const Activity = props => {
 
@@ -37,11 +39,25 @@ export const MountainBikingActivity = props => {
 
     let activity = props.activity;
 
+    let activityType = activity["sport_type"];
+
+    if (activityType == "Ride") {
+        activityType = "Road Ride";
+    }
+
     return (
         <div>
-            <LuBike />
-            <h3>{activity["name"]}</h3>
-            {activity["sport_type"]}
+            <header id="activity-header">
+                <div id="activity-icon">
+                    <IconContext.Provider value={{ size: "20em" }}>
+                        <div>
+                            <LuBike />
+                        </div>
+                    </IconContext.Provider>
+                </div>
+
+                <h3>{activityType}</h3>
+            </header>
 
             <div>
                 <ExpenseList useMockData={true} />
@@ -58,7 +74,6 @@ export const SkiingActivity = props => {
         <div>
             <FaSkiing />
             <h3>{activity["name"]}</h3>
-            {activity["sport_type"]}
 
             <div>
                 <ExpenseList useMockData={true} />

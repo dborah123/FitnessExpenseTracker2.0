@@ -16,7 +16,6 @@ function App() {
     return (
         <div>
             <h1 id="tabelLabel">Fitness Expense Tracker</h1>
-            <p>This component demonstrates fetching data from the server.</p>
             <ActivityList useMockData={true} />
         </div>
     );
@@ -26,7 +25,7 @@ function App() {
         url.searchParams.append('client_id', 126500);
         url.searchParams.append('redirect_uri', 'https://localhost:5173/');
         url.searchParams.append('response_type', 'code');
-        url.searchParams.append('scope', 'activity:read')
+        url.searchParams.append('scope', 'activity:read');
 
         return url;
     }

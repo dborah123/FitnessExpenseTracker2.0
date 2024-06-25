@@ -25,8 +25,8 @@ export const ExpenseList = props => {
     return (
         <div>
             {expenseList.map(expense => (
-                <div key={expense.Id}>
-                    <Expense activity={expense} useMockData={true} />
+                <div key={expense.id}>
+                    <Expense expense={expense} useMockData={true} />
                 </div>
             ))}
         </div>
@@ -34,10 +34,7 @@ export const ExpenseList = props => {
 }
 
 ExpenseList.propTypes = {
-    expense: PropTypes.shape({
-        expense: PropTypes.object
-    }),
-    useMockData: PropTypes.shape({
-        useMockData: PropTypes.Boolean
-    })
+    expense: PropTypes.object,
+    useMockData: PropTypes.bool,
+    linkedActivity: PropTypes.string,
 };
