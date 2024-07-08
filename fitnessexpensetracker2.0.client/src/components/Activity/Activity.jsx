@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ExpenseList } from '../Expense/ExpenseList';
 import { LuBike } from "react-icons/lu";
 import { FaSkiing } from "react-icons/fa";
-import { IconContext } from '../../../../node_modules/react-icons/lib/iconContext';
+import { IconContext } from "react-icons";
 import './activity.css'
 
 export const Activity = props => {
@@ -49,7 +49,7 @@ export const MountainBikingActivity = props => {
         <div>
             <header id="activity-header">
                 <div id="activity-icon">
-                    <IconContext.Provider value={{ size: "20em" }}>
+                    <IconContext.Provider value={{ size: '50px' }}>
                         <div>
                             <LuBike />
                         </div>

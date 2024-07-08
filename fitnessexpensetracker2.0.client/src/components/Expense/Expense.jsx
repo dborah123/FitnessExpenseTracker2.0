@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { MockExpense } from '../../assets/MockData';
 import { useState } from 'react';
+import { EditExpense } from './EditExpense'
 
 export const Expense = props => {
 
@@ -32,25 +33,7 @@ export const Expense = props => {
     )
 }
 
-export const EditExpense = props => {
-    console.log(props.isVisible);
-    return (
-        <div>
-            {
-            props.isVisible ? (
-                <p>Edit form!</p>
-                ) : null
-            }
-        </div>
-    )
-}
-
-
 Expense.propTypes = {
     expense: PropTypes.object,
     useMockData: PropTypes.bool
-};
-
-EditExpense.propTypes = {
-    isVisible: PropTypes.bool,
 };
