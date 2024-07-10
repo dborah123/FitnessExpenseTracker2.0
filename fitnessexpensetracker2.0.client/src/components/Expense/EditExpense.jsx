@@ -1,15 +1,17 @@
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik'
-import { ExpenseTypes } from './ExpenseLib'
+import { ExpenseTypes, ConvertDate } from './ExpenseLib'
 
 export const EditExpense = props => {
 
+    let expense = props.expense;
+    
     const formik = useFormik({
         initialValues: {
-            name: '',
-            amount: '',
-            purchaseDate: '',
-            expenseType: '',
+            name: expense.name,
+            amount: '' + expense.amount,
+            purchaseDate: ConvertDate(expense.purchaseDate),
+            expenseType: expense.expenseType,
         },
         validate,
         onSubmit: values => {
@@ -46,7 +48,7 @@ export const EditExpense = props => {
                             name="amount"
                             type="number"
                             onChange={formik.handleChange}
-                            value={formik.values.lastName}
+                            value={formik.values.amount}
                             required={true}
                         />
                         <label htmlFor="purchaseDate">Purchase Date</label>
@@ -83,7 +85,7 @@ export const EditExpense = props => {
 const validate = values => {
     const errors = {};
 
-    if (values.expenseType == "") {
+    if (values.expenseType === "") {
         errors.expenseType = "Expense type is required";
     }
 
@@ -92,4 +94,5 @@ const validate = values => {
 
 EditExpense.propTypes = {
     isVisible: PropTypes.bool,
+    expense: PropTypes.object,
 };

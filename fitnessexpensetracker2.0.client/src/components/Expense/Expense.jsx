@@ -28,7 +28,7 @@ export const Expense = props => {
                 {expense.name} for ${expense.amount}
             </div>
             <button onClick={toggleVisibility}>Edit</button>
-            <EditExpense isVisible={isVisible} />
+            <EditExpense isVisible={isVisible} expense={expense} />
         </div>
     )
 }
