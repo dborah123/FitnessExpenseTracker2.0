@@ -1,34 +1,26 @@
 import PropTypes from 'prop-types';
-import { MockExpenseList } from '../../assets/MockData';
 import axios from 'axios';
 import { getExpenseListURL } from '../../libraryfunctions/urllib';
 import { Expense } from './Expense';
-
-async function fetchExpenseData() {
-    const stravaActivityData = await axios.get(getExpenseListURL());
-    console.log(stravaActivityData)
-
-    return stravaActivityData;
-}
+import React from 'react'
 
 export const ExpenseList = props => {
 
-    let expenseList = null;
+    const [post, setPost] = React.useState(null);
 
-    if (props.useMockData) {
-        expenseList = MockExpenseList;
-    }
-    else {
-        expenseList = fetchExpenseData();
-    }
+    React.useEffect(() => {
+        axios.get(getExpenseListURL(props.linkedActivity)).then((response) => {
+            setPost(response.data);
+        });
+    }, []);
 
     return (
         <div>
-            {expenseList.map(expense => (
+            {post ? post.map(expense => (
                 <div key={expense.id}>
-                    <Expense expense={expense} useMockData={true} />
+                    <Expense expense={expense} useMockData={false} />
                 </div>
-            ))}
+            )) : null}
         </div>
     )
 }
@@ -36,5 +28,5 @@ export const ExpenseList = props => {
 ExpenseList.propTypes = {
     expense: PropTypes.object,
     useMockData: PropTypes.bool,
-    linkedActivity: PropTypes.string,
+    linkedActivity: PropTypes.number,
 };

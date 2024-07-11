@@ -1,5 +1,5 @@
 using FitnessExpenseTracker;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +14,11 @@ builder.Services.AddCors(options =>
                             .AllowAnyHeader()
                             .AllowAnyMethod(); ;
                       });
+});
+
+builder.Services.AddMvc(options =>
+{
+    options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
 });
 
 // Add services to the container.

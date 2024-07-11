@@ -5,7 +5,7 @@ import { EditExpense } from './EditExpense'
 
 export const Expense = props => {
 
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible, shouldRefresh] = useState(false);
 
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
@@ -21,14 +21,13 @@ export const Expense = props => {
         expense = props.expense;
     }
 
-
     return (
         <div>
             <div>
-                {expense.name} for ${expense.amount}
+                {expense.name} for ${expense.amount} {expense.id }
             </div>
             <button onClick={toggleVisibility}>Edit</button>
-            <EditExpense isVisible={isVisible} expense={expense} />
+            <EditExpense isVisible={isVisible} expense={expense} shouldRefresh={shouldRefresh} />
         </div>
     )
 }

@@ -31,7 +31,7 @@ export const EditExpense = props => {
                 .catch((err) => {
                     console.log(err)
                 });
-
+            props.shouldRefresh = true;
             alert(JSON.stringify(values, null, 2));
         },
     });
@@ -112,4 +112,5 @@ const validate = values => {
 EditExpense.propTypes = {
     isVisible: PropTypes.bool,
     expense: PropTypes.object,
+    shouldRefresh: PropTypes.bool,
 };

@@ -61,12 +61,11 @@ namespace FitnessExpenseTracker2._0.Server.Controllers
         public async Task<ActionResult<List<Expense>>> GetExpenseForActivity(string activity)
         {
             var expenseList = await _context.Database.SqlQuery<Expense>($"SELECT * FROM Expenses WHERE LinkedActivity={activity}").ToListAsync();
-
-            if (expenseList.IsNullOrEmpty())
+            if (expenseList.Count() == 0)
             {
-                return NotFound();
+                object? value = null;
+                return Ok(value);
             }
-
             return expenseList;
         }
 

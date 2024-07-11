@@ -17,8 +17,9 @@ export function getExpenseListURL(activity) {
     if (activity != null) {
         urlString = urlString + "activity/" + activity;
     }
+    else {
+        return "";
+    }
 
-    var url = new URL(urlString);
-
-    return url;
+    return urlString;
 }

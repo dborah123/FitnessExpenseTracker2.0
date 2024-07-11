@@ -60,7 +60,7 @@ export const MountainBikingActivity = props => {
             </header>
 
             <div>
-                <ExpenseList useMockData={true} />
+                <ExpenseList linkedActivity={activity.id} />
             </div>
         </div>
     );
@@ -84,6 +84,7 @@ export const SkiingActivity = props => {
 
 Activity.propTypes = {
     activity: PropTypes.shape({
+        id: PropTypes.number,
         name: PropTypes.string,
         sport_type: PropTypes.string,
     })
@@ -91,6 +92,7 @@ Activity.propTypes = {
 
 MountainBikingActivity.propTypes = {
     activity: PropTypes.shape({
+        id: PropTypes.number,
         name: PropTypes.string,
         sport_type: PropTypes.string,
     })
@@ -98,6 +100,7 @@ MountainBikingActivity.propTypes = {
 
 SkiingActivity.propTypes = {
     activity: PropTypes.shape({
+        id: PropTypes.number,
         name: PropTypes.string,
         sport_type: PropTypes.string,
     }),
