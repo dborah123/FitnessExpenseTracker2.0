@@ -3,8 +3,20 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var specificOrgins = "AppOrigins";
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: specificOrgins,
+                      policy =>
+                      {
+                            policy.WithOrigins("https://localhost:5173")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod(); ;
+                      });
+});
+
+// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>();
 
@@ -16,6 +28,8 @@ app.UseStaticFiles();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
+
+app.UseCors(specificOrgins);
 
 app.UseAuthorization();
 

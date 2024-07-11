@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik'
 import { ExpenseTypes, ConvertDate } from './ExpenseLib'
+import axios from 'axios';
 
 export const EditExpense = props => {
 
@@ -15,6 +16,22 @@ export const EditExpense = props => {
         },
         validate,
         onSubmit: values => {
+            values.id = expense.id;
+            values.linkedActivity = expense.linkedActivity;
+            values.sportsType = expense.sportsType;
+            values.stravaUserID = expense.stravaUserID;
+            values.purchaseDate = expense.purchaseDate;
+
+
+
+            axios.put('https://localhost:7241/api/Expenses/' + expense.id, values)
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+
             alert(JSON.stringify(values, null, 2));
         },
     });
