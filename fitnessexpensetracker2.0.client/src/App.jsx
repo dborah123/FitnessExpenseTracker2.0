@@ -1,34 +1,37 @@
-import { useEffect } from 'react';
 import './App.css';
-import { ActivityList } from './components/Activity/ActivityList'
+import { ActivityList } from './components/Activity/ActivityList';
 
 function App() {
 
-    useEffect(() => {
-        async function fetchData() {
-            //const stravaAuthResponse = await axios.get(GetURL());
-            //console.log(stravaAuthResponse)
-            GetURL();
-        }
-        fetchData();
-    }, []);
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get('code');
+    console.log(code)
+
+
+    const handleClick = () => {
+        // Ask for auth
+        window.location.replace(getAuthURL());
+    }
 
     return (
         <div>
             <h1 id="tabelLabel">Fitness Expense Tracker</h1>
-            <ActivityList useMockData={true} />
+            {
+                code ? <ActivityList useMockData={true} />
+                : <button onClick={handleClick}>Authenticate with Strava</button>
+            }
+            
+            
         </div>
     );
-    
-    function GetURL() {
-        var url = new URL('https://www.strava.com/oauth/authorize');
-        url.searchParams.append('client_id', 126500);
-        url.searchParams.append('redirect_uri', 'https://localhost:5173/');
-        url.searchParams.append('response_type', 'code');
-        url.searchParams.append('scope', 'activity:read');
+}
 
-        return url;
-    }
+function getAuthURL() {
+    const clientId = import.meta.env.VITE_APP_CLIENT_ID
+    const websiteURL = import.meta.env.VITE_APP_WEBSITE_URL
+
+    return `http://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${websiteURL}&approval_prompt=force&scope=read`;
 }
 
 export default App;
