@@ -12,7 +12,7 @@ export function getAuthURL() {
     const clientId = import.meta.env.VITE_APP_CLIENT_ID
     const websiteURL = import.meta.env.VITE_APP_WEBSITE_URL
 
-    return `http://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${websiteURL}&approval_prompt=force&scope=read`;
+    return `http://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${websiteURL}&approval_prompt=force&scope=read,activity:read`;
 }
 
 /**
@@ -25,13 +25,13 @@ export function getRegisterClientURL(code) {
 /**
  * STRAVA ACTIVITIES
  */
-export function getStravaActivitiesURL() {
+export function getStravaActivitiesURL(accessToken) {
     let urlString = stravaBaseUrl + "/athlete/activities/";
     var url = new URL(urlString);
 
-    url.searchParams.append('access_token', 'x');
+    url.searchParams.append('access_token', accessToken);
 
-    return url;
+    return url.toString();
 }
 /**
  * EXPENSES 
@@ -44,7 +44,7 @@ export function getExpenseListURL(activity) {
         urlString = urlString + "activity/" + activity;
     }
     else {
-        return "";
+        return null;
     }
 
     return urlString;

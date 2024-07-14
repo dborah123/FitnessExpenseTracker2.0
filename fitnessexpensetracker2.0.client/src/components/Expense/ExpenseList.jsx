@@ -2,21 +2,28 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { getExpenseListURL } from '../../libraryfunctions/urllib';
 import { Expense } from './Expense';
-import React from 'react'
+import { useState, useEffect} from 'react'
 
 export const ExpenseList = props => {
 
-    const [post, setPost] = React.useState(null);
+    const [expenseList, setExpenseList] = useState(false);
 
-    React.useEffect(() => {
-        axios.get(getExpenseListURL(props.linkedActivity)).then((response) => {
-            setPost(response.data);
-        });
+    useEffect(() => {
+        let url = getExpenseListURL(props.linkedActivity);
+        if (url != null) {
+            axios.get(url).then((response) => {
+                if (response.data != null) {
+                    console.log(response.data);
+                    console.log(getExpenseListURL(props.linkedActivity))
+                }
+                setExpenseList(response.data);
+            });
+        }
     }, []);
 
     return (
         <div>
-            {post ? post.map(expense => (
+            {expenseList ? expenseList.map(expense => (
                 <div key={expense.id}>
                     <Expense expense={expense} useMockData={false} />
                 </div>

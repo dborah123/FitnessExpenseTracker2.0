@@ -21,18 +21,14 @@ function App() {
     const effectRan = useRef(false);
 
     useEffect(() => {
-        if (!effectRan.current) {
-            console.log("effect applied - only on the FIRST mount");
-        }
 
         if (!effectRan.current && code != null && !isLoggedIn) {
             axios.get(getRegisterClientURL(code)).then(response => {
 
                 let responseData = JSON.parse(response.data);
-                console.log(responseData);
 
                 if (responseData.errors == null) {
-                    setAthlete(response.data);
+                    setAthlete(responseData);
                     setIsLoggedIn(true);
                 }
 
@@ -46,7 +42,7 @@ function App() {
         <div>
             <h1 id="tabelLabel">Fitness Expense Tracker</h1>
             {
-                isLoggedIn && athlete ? <ActivityList useMockData={true} athlete={JSON.parse(athlete)} />
+                isLoggedIn && athlete ? <ActivityList useMockData={false} athlete={athlete} />
                     : <StravaLogin />
             }
         </div>
