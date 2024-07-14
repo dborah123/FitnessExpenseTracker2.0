@@ -6,7 +6,6 @@ import { Activity } from './Activity';
 
 async function fetchActivityData() {
     const stravaActivityData = await axios.get(getStravaActivitiesURL());
-    console.log(stravaActivityData)
 
     return stravaActivityData;
 }
@@ -34,6 +33,7 @@ export const ActivityList = props => {
 }
 
 ActivityList.propTypes = {
+    athlete: PropTypes.object,
     useMockData: PropTypes.bool
 };
 

@@ -1,37 +1,56 @@
 import './App.css';
 import { ActivityList } from './components/Activity/ActivityList';
+import { StravaLogin } from './components/Login/Login';
+import axios from 'axios';
+import { useState, useEffect, useRef } from 'react';
+import { getRegisterClientURL } from './libraryfunctions/urllib';
 
 function App() {
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const code = urlParams.get('code');
-    console.log(code)
-
-
-    const handleClick = () => {
-        // Ask for auth
-        window.location.replace(getAuthURL());
+    const getAccessCodeQueryParam = () => {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        return urlParams.get('code');
     }
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [athlete, setAthlete] = useState(false);
+
+    const code = getAccessCodeQueryParam();
+
+    const effectRan = useRef(false);
+
+    useEffect(() => {
+        if (!effectRan.current) {
+            console.log("effect applied - only on the FIRST mount");
+        }
+
+        if (!effectRan.current && code != null && !isLoggedIn) {
+            axios.get(getRegisterClientURL(code)).then(response => {
+
+                let responseData = JSON.parse(response.data);
+                console.log(responseData);
+
+                if (responseData.errors == null) {
+                    setAthlete(response.data);
+                    setIsLoggedIn(true);
+                }
+
+            });
+        }
+
+        return () => effectRan.current = true;
+    }, []);
 
     return (
         <div>
             <h1 id="tabelLabel">Fitness Expense Tracker</h1>
             {
-                code ? <ActivityList useMockData={true} />
-                : <button onClick={handleClick}>Authenticate with Strava</button>
+                isLoggedIn && athlete ? <ActivityList useMockData={true} athlete={JSON.parse(athlete)} />
+                    : <StravaLogin />
             }
-            
-            
         </div>
     );
-}
-
-function getAuthURL() {
-    const clientId = import.meta.env.VITE_APP_CLIENT_ID
-    const websiteURL = import.meta.env.VITE_APP_WEBSITE_URL
-
-    return `http://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${websiteURL}&approval_prompt=force&scope=read`;
 }
 
 export default App;
