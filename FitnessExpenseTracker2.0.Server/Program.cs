@@ -1,5 +1,11 @@
 using FitnessExpenseTracker;
+using FitnessExpenseTracker2._0.Server.Env;
 using Microsoft.AspNetCore.Mvc.Formatters;
+
+var root = Directory.GetCurrentDirectory();
+var dotenv = Path.Combine(root, ".env");
+DotEnv.Load(dotenv);
+var config = new ConfigurationBuilder().AddEnvironmentVariables().Build();
 
 var builder = WebApplication.CreateBuilder(args);
 
