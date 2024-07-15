@@ -5,6 +5,8 @@ import { LuBike } from "react-icons/lu";
 import { FaSkiing } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import './activity.css'
+import { EditExpense } from '../Expense/EditExpense';
+import { useState } from 'react';
 
 export const Activity = props => {
 
@@ -37,6 +39,12 @@ export const Activity = props => {
 
 export const MountainBikingActivity = props => {
 
+    const [isVisible, setIsVisible, shouldRefresh] = useState(false);
+
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+    };
+
     let activity = props.activity;
 
     let activityType = activity["sport_type"];
@@ -61,6 +69,8 @@ export const MountainBikingActivity = props => {
 
             <div>
                 <ExpenseList linkedActivity={activity.id} />
+                <button onClick={toggleVisibility}>Add</button>
+                <EditExpense isVisible={isVisible} shouldRefresh={shouldRefresh} addExpense={true} linkedActivity={activity.id} />
             </div>
         </div>
     );

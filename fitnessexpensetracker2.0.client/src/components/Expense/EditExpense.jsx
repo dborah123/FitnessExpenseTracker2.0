@@ -6,18 +6,34 @@ import axios from 'axios';
 export const EditExpense = props => {
 
     let expense = props.expense;
-    
-    const formik = useFormik({
-        initialValues: {
+
+    let linkedActivityId;
+    let initialValues;
+
+    if (props.addExpense) {
+        linkedActivityId = props.linkedActivityId;
+        initialValues = {
+            name: '',
+            amount: '',
+            purchaseDate: '',
+            expenseType: '',
+        }
+    } else {
+        linkedActivityId = expense.linkedActivity;
+        initialValues = {
             name: expense.name,
             amount: '' + expense.amount,
             purchaseDate: ConvertDate(expense.purchaseDate),
             expenseType: expense.expenseType,
-        },
+        }
+    }
+    
+    const formik = useFormik({
+        initialValues: initialValues,
         validate,
         onSubmit: values => {
             values.id = expense.id;
-            values.linkedActivity = expense.linkedActivity;
+            values.linkedActivity = linkedActivityId;
             values.sportsType = expense.sportsType;
             values.stravaUserID = expense.stravaUserID;
             values.purchaseDate = expense.purchaseDate;
@@ -113,4 +129,6 @@ EditExpense.propTypes = {
     isVisible: PropTypes.bool,
     expense: PropTypes.object,
     shouldRefresh: PropTypes.bool,
+    addExpense: PropTypes.bool,
+    linkedActivityId: PropTypes.string,
 };
