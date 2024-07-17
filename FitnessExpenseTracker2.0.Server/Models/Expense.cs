@@ -106,7 +106,7 @@ namespace FitnessExpenseTracker.Models
         ///   <c>true</c> if strava user identifier valid; otherwise, <c>false</c>.</returns>
         private bool IsStravaUserIDValid()
         {
-            return this.StravaUserID is not null;
+            return true;
         }
 
         /// <summary>Determines whether the amount is valid.</summary>

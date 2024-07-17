@@ -11,7 +11,7 @@ export const EditExpense = props => {
     let initialValues;
 
     if (props.addExpense) {
-        linkedActivityId = props.linkedActivityId;
+        linkedActivityId = props.linkedActivity;
         initialValues = {
             name: '',
             amount: '',
@@ -32,23 +32,35 @@ export const EditExpense = props => {
         initialValues: initialValues,
         validate,
         onSubmit: values => {
-            values.id = expense.id;
-            values.linkedActivity = linkedActivityId;
-            values.sportsType = expense.sportsType;
-            values.stravaUserID = expense.stravaUserID;
-            values.purchaseDate = expense.purchaseDate;
+            values.linkedActivity = String(linkedActivityId);
+            values.expenseType = Number(values.expenseType);
 
-
-
-            axios.put('https://localhost:7241/api/Expenses/' + expense.id, values)
-                .then((res) => {
-                    console.log(res)
-                })
-                .catch((err) => {
-                    console.log(err)
+            if (props.addExpense) {
+                axios.post('https://localhost:7241/api/Expenses/', values, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }).then((res) => {
+                    console.log(res);
+                }).catch((err) => {
+                    console.log(err);
                 });
-            props.shouldRefresh = true;
-            alert(JSON.stringify(values, null, 2));
+            }
+            else {
+                values.id = expense.id;
+                values.linkedActivity = linkedActivityId;
+                values.sportsType = expense.sportsType;
+                values.stravaUserID = expense.stravaUserID;
+                values.purchaseDate = expense.purchaseDate;
+
+                axios.put('https://localhost:7241/api/Expenses/' + expense.id, values)
+                    .then((res) => {
+                        console.log(res)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    });
+            }
         },
     });
 
@@ -130,5 +142,5 @@ EditExpense.propTypes = {
     expense: PropTypes.object,
     shouldRefresh: PropTypes.bool,
     addExpense: PropTypes.bool,
-    linkedActivityId: PropTypes.string,
+    linkedActivity: PropTypes.number,
 };
