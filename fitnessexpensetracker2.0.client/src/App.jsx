@@ -1,6 +1,7 @@
 import './App.css';
 import { ActivityList } from './components/Activity/ActivityList';
 import { StravaLogin } from './components/Login/Login';
+import { Header } from './components/Header/Header';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { getRegisterClientURL } from './libraryfunctions/urllib';
@@ -28,6 +29,7 @@ function App() {
                 let responseData = JSON.parse(response.data);
 
                 if (responseData.errors == null) {
+                    console.log(responseData);
                     setAthlete(responseData);
                     setIsLoggedIn(true);
                 }
@@ -40,7 +42,7 @@ function App() {
 
     return (
         <div>
-            <h1 id="tabelLabel">Fitness Expense Tracker</h1>
+            <Header />
             {
                 isLoggedIn && athlete ? <ActivityList useMockData={false} athlete={athlete} />
                     : <StravaLogin />

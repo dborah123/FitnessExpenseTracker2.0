@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import { ExpenseTypes, ConvertDate } from './ExpenseLib'
 import axios from 'axios';
 
-export const EditExpense = props => {
+export const EditExpense = (props) => {
 
     let expense = props.expense;
 
@@ -34,6 +34,7 @@ export const EditExpense = props => {
         onSubmit: values => {
             values.linkedActivity = String(linkedActivityId);
             values.expenseType = Number(values.expenseType);
+            values.stravaUserID = "123";
 
             if (props.addExpense) {
                 axios.post('https://localhost:7241/api/Expenses/', values, {
@@ -77,6 +78,7 @@ export const EditExpense = props => {
         <div>
             {
                 props.isVisible ? (
+                    <div>
                     <form onSubmit={formik.handleSubmit}>
                         <label htmlFor="name" >Name</label>
                         <input
@@ -119,7 +121,8 @@ export const EditExpense = props => {
                         {formik.errors.expenseType && formik.touched.expenseType ? <div>{formik.errors.expenseType}</div> : null}
 
                         <button type="submit">Submit</button>
-                    </form>
+                        </form>
+                    </div>
                 ) : null
             }
         </div>

@@ -12,10 +12,6 @@ export const ExpenseList = props => {
         let url = getExpenseListURL(props.linkedActivity);
         if (url != null) {
             axios.get(url).then((response) => {
-                if (response.data != null) {
-                    console.log(response.data);
-                    console.log(getExpenseListURL(props.linkedActivity))
-                }
                 setExpenseList(response.data);
             });
         }

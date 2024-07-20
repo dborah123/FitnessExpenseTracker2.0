@@ -22,14 +22,18 @@ export const Activity = props => {
     if (activity["sport_type"] == "Ride" || activity["sport_type"] == "MountainBikeRide") {
         return (
             <div>
-                <MountainBikingActivity activity={activity} />
+                <MountainBikingActivity
+                    activity={activity}
+                />
             </div>
         )
     }
     else {
         return (
             <div>
-                <SkiingActivity activity={activity} />
+                <SkiingActivity
+                    activity={activity}
+                />
             </div>
         )
     }
@@ -39,7 +43,7 @@ export const Activity = props => {
 
 export const MountainBikingActivity = props => {
 
-    const [isVisible, setIsVisible, shouldRefresh] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
@@ -70,7 +74,11 @@ export const MountainBikingActivity = props => {
             <div>
                 <ExpenseList linkedActivity={activity.id} />
                 <button onClick={toggleVisibility}>Add</button>
-                <EditExpense isVisible={isVisible} shouldRefresh={shouldRefresh} addExpense={true} linkedActivity={activity.id} />
+                <EditExpense
+                    isVisible={isVisible}
+                    addExpense={true}
+                    linkedActivity={activity.id}
+                />
             </div>
         </div>
     );
@@ -97,7 +105,7 @@ Activity.propTypes = {
         id: PropTypes.number,
         name: PropTypes.string,
         sport_type: PropTypes.string,
-    })
+    }),
 };
 
 MountainBikingActivity.propTypes = {
@@ -105,7 +113,7 @@ MountainBikingActivity.propTypes = {
         id: PropTypes.number,
         name: PropTypes.string,
         sport_type: PropTypes.string,
-    })
+    }),
 };
 
 SkiingActivity.propTypes = {
