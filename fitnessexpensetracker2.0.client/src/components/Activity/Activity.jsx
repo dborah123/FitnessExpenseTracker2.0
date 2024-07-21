@@ -2,7 +2,7 @@ import { MockActivity } from '../../assets/MockData'
 import PropTypes from 'prop-types';
 import { ExpenseList } from '../Expense/ExpenseList';
 import { LuBike } from "react-icons/lu";
-import { FaSkiing } from "react-icons/fa";
+import { FaSkiing, FaPlus } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import './styles/activity.css'
 import { EditExpense } from '../Expense/EditExpense';
@@ -37,8 +37,6 @@ export const Activity = props => {
             </div>
         )
     }
-
-    
 }
 
 export const MountainBikingActivity = props => {
@@ -55,23 +53,59 @@ export const MountainBikingActivity = props => {
 
     if (activityType == "Ride") {
         activityType = "Road Ride";
+    } else {
+        activityType = "Mountain Bike Ride"
     }
+
+    let datetime = new Date(activity['start_date_local']);
+    let formattedDate = getFormattedDate(datetime);
 
     return (
         <div>
-            <div id="activity-header" className="flex-container">
-                <div id="activity-icon" className="flex-item" >
+            <div className="activity-header flex-container">
+                <div className="flex-item activity-icon" >
                     <IconContext.Provider value={{ size: '50px' }}>
                         <div>
                             <LuBike />
                         </div>
                     </IconContext.Provider>
                 </div>
-                <div className="flex-item">
-                    <h3>{activityType}</h3>
+                <div className="flex-item activity-info ">
+                    <div className="grid-container">
+                        <div className="grid-item grid-item-left-col">
+                            <h3 className="override">Activity Name: </h3>
+                        </div>
+                        <div className="grid-item">
+                            <h3 className="override">{activity["name"]}</h3>
+                        </div>
+                        <div className="grid-item grid-item-left-col">
+                            <h3 className="override">Type: </h3> 
+                        </div>
+                        <div className="grid-item">
+                            <h3 className="override">{activityType}</h3>
+                        </div>
+                        <div className="grid-item grid-item-left-col">
+                            <h3 className="override">Date: </h3>
+                        </div>
+                        <div className="grid-item">
+                            <h3 className="override">{formattedDate}</h3>
+                        </div>
+                    </div>
+
                 </div>
-                <div className="flex-item">
-                    <button id="add-button" onClick={toggleVisibility}>Add</button>
+                <div className="flex-item flex-item-left">
+                    <button className="add-button btn-flex-container" onClick={toggleVisibility}>
+                        <div className="btn-flex-item">
+                            <IconContext.Provider value={{ size: '15px' }}>
+                                <div>
+                                    <FaPlus />
+                                </div>
+                            </IconContext.Provider>
+                        </div>
+                        <div className="btn-flex-item">
+                            Add
+                        </div>
+                    </button>
                 </div>
             </div>
 
@@ -104,11 +138,20 @@ export const SkiingActivity = props => {
     );
 }
 
+function getFormattedDate(date) {
+    let year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+
+    return month + '/' + day + '/' + year;
+}
+
 Activity.propTypes = {
     activity: PropTypes.shape({
         id: PropTypes.number,
         name: PropTypes.string,
         sport_type: PropTypes.string,
+        start_date_local: PropTypes.string,
     }),
 };
 
@@ -117,6 +160,7 @@ MountainBikingActivity.propTypes = {
         id: PropTypes.number,
         name: PropTypes.string,
         sport_type: PropTypes.string,
+        start_date_local: PropTypes.string,
     }),
 };
 
@@ -125,6 +169,7 @@ SkiingActivity.propTypes = {
         id: PropTypes.number,
         name: PropTypes.string,
         sport_type: PropTypes.string,
+        start_date_local: PropTypes.string,
     }),
 };
 
