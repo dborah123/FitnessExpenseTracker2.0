@@ -9,7 +9,11 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="tailwind.config.js" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="src\components\Header\" />
+    <Folder Include="src\components\Login\styles\" />
     <Folder Include="src\libraryfunctions\" />
   </ItemGroup>
 </Project>
