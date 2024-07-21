@@ -4,7 +4,7 @@ import { ExpenseList } from '../Expense/ExpenseList';
 import { LuBike } from "react-icons/lu";
 import { FaSkiing } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import './activity.css'
+import './styles/activity.css'
 import { EditExpense } from '../Expense/EditExpense';
 import { useState } from 'react';
 
@@ -59,21 +59,25 @@ export const MountainBikingActivity = props => {
 
     return (
         <div>
-            <header id="activity-header">
-                <div id="activity-icon">
+            <div id="activity-header" className="flex-container">
+                <div id="activity-icon" className="flex-item" >
                     <IconContext.Provider value={{ size: '50px' }}>
                         <div>
                             <LuBike />
                         </div>
                     </IconContext.Provider>
                 </div>
-
-                <h3>{activityType}</h3>
-            </header>
+                <div className="flex-item">
+                    <h3>{activityType}</h3>
+                </div>
+                <div className="flex-item">
+                    <button id="add-button" onClick={toggleVisibility}>Add</button>
+                </div>
+            </div>
 
             <div>
                 <ExpenseList linkedActivity={activity.id} />
-                <button onClick={toggleVisibility}>Add</button>
+                
                 <EditExpense
                     isVisible={isVisible}
                     addExpense={true}
