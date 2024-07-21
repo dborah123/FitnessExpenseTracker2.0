@@ -61,8 +61,8 @@ export const MountainBikingActivity = props => {
     let formattedDate = getFormattedDate(datetime);
 
     return (
-        <div>
-            <div className="activity-header flex-container">
+        <div className="activity-header">
+            <div className="flex-container">
                 <div className="flex-item activity-icon" >
                     <IconContext.Provider value={{ size: '50px' }}>
                         <div>
@@ -108,10 +108,9 @@ export const MountainBikingActivity = props => {
                     </button>
                 </div>
             </div>
-
             <div>
                 <ExpenseList linkedActivity={activity.id} />
-                
+
                 <EditExpense
                     isVisible={isVisible}
                     addExpense={true}

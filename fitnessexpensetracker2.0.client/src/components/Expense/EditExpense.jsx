@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
-import { useFormik } from 'formik'
-import { ExpenseTypes, ConvertDate } from './ExpenseLib'
+import { useFormik } from 'formik';
+import { ExpenseTypes, ConvertDate } from './ExpenseLib';
 import axios from 'axios';
+import './styles/editexpense.css';
+import { MdOutlineEdit } from "react-icons/md";
+import { IconContext } from "react-icons";
 
 export const EditExpense = (props) => {
 
@@ -79,48 +82,76 @@ export const EditExpense = (props) => {
             {
                 props.isVisible ? (
                     <div>
-                    <form onSubmit={formik.handleSubmit}>
-                        <label htmlFor="name" >Name</label>
-                        <input
-                            id="name"
-                            name="name"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.name}
-                            required={true}
-                        />
-                        <label htmlFor="amount">Amount</label>
-                        <input
-                            id="amount"
-                            name="amount"
-                            type="number"
-                            onChange={formik.handleChange}
-                            value={formik.values.amount}
-                            required={true}
-                        />
-                        <label htmlFor="purchaseDate">Purchase Date</label>
-                        <input
-                            id="purchaseDate"
-                            name="purchaseDate"
-                            type="date"
-                            onChange={formik.handleChange}
-                            value={formik.values.purchaseDate}
-                            required={true}
-                        />
-                        <label htmlFor="expenseType">Expense Type</label>
-        
-                        <select
-                            id="expenseType"
-                            name="expenseType"
-                            onChange={formik.handleChange}
-                            value={formik.values.expenseType}
-                            required={true}
-                        >
-                            {options}
-                        </select>
-                        {formik.errors.expenseType && formik.touched.expenseType ? <div>{formik.errors.expenseType}</div> : null}
+                        <form className="flex-container" onSubmit={formik.handleSubmit}>
+                            <div className="flex-item form__group field">
+                                <label className="form__label" htmlFor="name" >Name</label>
+                                <input
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.name}
+                                    required={true}
+                                    className="form__field"
+                                />
+                            </div>
 
-                        <button type="submit">Submit</button>
+                            <div className="flex-item form__group field">
+                                <label className="form__label" htmlFor="amount">Amount</label>
+                                <input
+                                    id="amount"
+                                    name="amount"
+                                    type="number"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.amount}
+                                    required={true}
+                                    className="form__field"
+                                />
+                            </div>
+
+                            <div className="flex-item form__group field">
+                                <label className="form__label" htmlFor="purchaseDate">Purchase Date</label>
+                                <input
+                                    id="purchaseDate"
+                                    name="purchaseDate"
+                                    type="date"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.purchaseDate}
+                                    required={true}
+                                    className="form__field"
+                                />
+                            </div>
+
+                            <div className="flex-item form__group field">
+                                <label className="form__label" htmlFor="expenseType">Expense Type</label>
+                                <select
+                                    id="expenseType"
+                                    name="expenseType"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.expenseType}
+                                    required={true}
+                                    className="form__field"
+                                >
+                                    {options}
+                                </select>
+                            </div>
+
+                            <div className="flex-item">
+                                <button className="edit-btn btn-flex-container" type="submit">
+                                    <div className="btn-flex-item">
+                                        <IconContext.Provider value={{ size: '20px' }}>
+                                            <div>
+                                                <MdOutlineEdit />
+                                            </div>
+                                        </IconContext.Provider>
+                                    </div>
+                                    <div className="btn-flex-item">
+                                        Submit
+                                    </div>
+                                </button>
+                            </div>
+
+                            {formik.errors.expenseType && formik.touched.expenseType ? <div>{formik.errors.expenseType}</div> : null}
                         </form>
                     </div>
                 ) : null
