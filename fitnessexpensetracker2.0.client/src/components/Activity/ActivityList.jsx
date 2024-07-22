@@ -7,7 +7,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 
 export const ActivityList = props => {
 
-    const [activities, setActivities, shouldRefresh, setShouldRefresh] = useState(false);
+    const [activities, setActivities, setShouldRefresh] = useState(false);
     const effectRan = useRef(false);
 
     if (props.useMockData && activities == false) {

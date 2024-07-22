@@ -4,9 +4,26 @@ import { ExpenseTypes, ConvertDate } from './ExpenseLib';
 import axios from 'axios';
 import './styles/editexpense.css';
 import { FaCheck } from "react-icons/fa";
+import { MdOutlineEdit } from "react-icons/md";
+import { GiCancel } from "react-icons/gi";
 import { IconContext } from "react-icons";
+import { useState } from 'react';
 
 export const EditExpense = (props) => {
+    
+    const [isEditable, setIsEditable] = useState(props.addExpense == true);
+
+    const toggleIsEditable = () => {
+        setIsEditable(!isEditable);
+    }
+
+    const toggleFromCancel = () => {
+        if (props.addExpense) {
+            props.toggleExpenseVisability();
+        } else {
+            toggleIsEditable();
+        }
+    }
 
     let expense = props.expense;
 
@@ -65,6 +82,8 @@ export const EditExpense = (props) => {
                         console.log(err)
                     });
             }
+
+            toggleIsEditable();
         },
     });
 
@@ -92,6 +111,7 @@ export const EditExpense = (props) => {
                                     onChange={formik.handleChange}
                                     value={formik.values.name}
                                     required={true}
+                                    disabled={!isEditable}
                                     className="form__field"
                                 />
                             </div>
@@ -105,6 +125,7 @@ export const EditExpense = (props) => {
                                     onChange={formik.handleChange}
                                     value={formik.values.amount}
                                     required={true}
+                                    disabled={!isEditable}
                                     className="form__field"
                                 />
                             </div>
@@ -118,6 +139,7 @@ export const EditExpense = (props) => {
                                     onChange={formik.handleChange}
                                     value={formik.values.purchaseDate}
                                     required={true}
+                                    disabled={!isEditable}
                                     className="form__field"
                                 />
                             </div>
@@ -130,26 +152,63 @@ export const EditExpense = (props) => {
                                     onChange={formik.handleChange}
                                     value={formik.values.expenseType}
                                     required={true}
+                                    disabled={!isEditable}
                                     className="form__field"
                                 >
                                     {options}
                                 </select>
                             </div>
 
-                            <div className="flex-item">
-                                <button className="edit-btn btn-flex-container" type="submit">
-                                    <div className="btn-flex-item">
-                                        <IconContext.Provider value={{ size: '20px' }}>
-                                            <div>
-                                                <FaCheck />
+                            {isEditable ? 
+                                <div>
+                                    <div className="flex-item">
+                                        <button className="btn cancel-btn btn-flex-container" onClick={toggleFromCancel}>
+                                            <div className="btn-flex-item">
+                                                <IconContext.Provider value={{ size: '22px' }}>
+                                                    <div>
+                                                        <GiCancel />
+                                                    </div>
+                                                </IconContext.Provider>
                                             </div>
-                                        </IconContext.Provider>
+                                            <div className="btn-flex-item">
+                                                Cancel
+                                            </div>
+                                        </button>
                                     </div>
-                                    <div className="btn-flex-item">
-                                        Submit
+
+                                    <div className="flex-item">
+                                        <button className="btn submit-btn btn-flex-container" type="submit">
+                                            <div className="btn-flex-item">
+                                                <IconContext.Provider value={{ size: '20px' }}>
+                                                    <div>
+                                                        <FaCheck />
+                                                    </div>
+                                                </IconContext.Provider>
+                                            </div>
+                                            <div className="btn-flex-item">
+                                                Submit
+                                            </div>
+                                        </button>
                                     </div>
-                                </button>
-                            </div>
+
+                                </div>
+
+                                :
+                                <div className="flex-item">
+                                    <button className="btn edit-btn btn-flex-container" onClick={toggleIsEditable}>
+                                        <div className="btn-flex-item">
+                                            <IconContext.Provider value={{ size: '20px' }}>
+                                                <div>
+                                                    <MdOutlineEdit />
+                                                </div>
+                                            </IconContext.Provider>
+                                        </div>
+                                        <div className="btn-flex-item">
+                                            Edit
+                                        </div>
+                                    </button>
+                                </div>
+                                }
 
                             {formik.errors.expenseType && formik.touched.expenseType ? <div>{formik.errors.expenseType}</div> : null}
                         </form>
@@ -174,7 +233,7 @@ const validate = values => {
 EditExpense.propTypes = {
     isVisible: PropTypes.bool,
     expense: PropTypes.object,
-    shouldRefresh: PropTypes.bool,
     addExpense: PropTypes.bool,
     linkedActivity: PropTypes.number,
+    toggleExpenseVisability: PropTypes.func,
 };

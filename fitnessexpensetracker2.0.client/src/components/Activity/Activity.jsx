@@ -115,6 +115,7 @@ export const MountainBikingActivity = props => {
                     isVisible={isVisible}
                     addExpense={true}
                     linkedActivity={activity.id}
+                    toggleExpenseVisability={toggleVisibility}
                 />
             </div>
         </div>
