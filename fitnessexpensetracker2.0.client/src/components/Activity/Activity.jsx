@@ -4,7 +4,7 @@ import { ExpenseList } from '../Expense/ExpenseList';
 import { LuBike } from "react-icons/lu";
 import { FaSkiing, FaPlus } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import './styles/activity.css'
+import './styles/activity.css';
 import { EditExpense } from '../Expense/EditExpense';
 import { useState } from 'react';
 
@@ -61,8 +61,8 @@ export const MountainBikingActivity = props => {
     let formattedDate = getFormattedDate(datetime);
 
     return (
-        <div className="activity-header">
-            <div className="flex-container">
+        <div className="activity-header vert-flex-container">
+            <div className="flex-container vert-flex-item">
                 <div className="flex-item activity-icon" >
                     <IconContext.Provider value={{ size: '50px' }}>
                         <div>
@@ -108,7 +108,7 @@ export const MountainBikingActivity = props => {
                     </button>
                 </div>
             </div>
-            <div>
+            <div className="vert-flex-item">
                 <ExpenseList linkedActivity={activity.id} />
 
                 <EditExpense

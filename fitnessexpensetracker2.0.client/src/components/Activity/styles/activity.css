@@ -10,7 +10,7 @@
     font-size: 1em;
     font-weight: 500;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    background-color: #707575;
+    background-color: #737777;
     margin: 20px;
 }
 
@@ -59,6 +59,15 @@
 .btn-flex-item {
     align-self: center;
     padding: 2px;
+}
+
+.vert-flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.vert-flex-item {
+
 }
 
 .grid-container {
