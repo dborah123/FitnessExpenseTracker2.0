@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { ExpenseTypes, ConvertDate } from './ExpenseLib';
 import axios from 'axios';
 import './styles/editexpense.css';
-import { MdOutlineEdit } from "react-icons/md";
+import { FaCheck } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
 export const EditExpense = (props) => {
@@ -81,7 +81,7 @@ export const EditExpense = (props) => {
         <div>
             {
                 props.isVisible ? (
-                    <div>
+                    <div className="edit-expense">
                         <form className="flex-container" onSubmit={formik.handleSubmit}>
                             <div className="flex-item form__group field">
                                 <label className="form__label" htmlFor="name" >Name</label>
@@ -141,7 +141,7 @@ export const EditExpense = (props) => {
                                     <div className="btn-flex-item">
                                         <IconContext.Provider value={{ size: '20px' }}>
                                             <div>
-                                                <MdOutlineEdit />
+                                                <FaCheck />
                                             </div>
                                         </IconContext.Provider>
                                     </div>

@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { MockExpense } from '../../assets/MockData';
 import { useState } from 'react';
-import { EditExpense } from './EditExpense'
+import { EditExpense } from './EditExpense';
+import { MdOutlineEdit } from "react-icons/md";
 
 export const Expense = props => {
 
