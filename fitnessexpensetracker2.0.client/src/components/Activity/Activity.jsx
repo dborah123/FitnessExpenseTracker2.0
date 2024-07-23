@@ -28,7 +28,7 @@ export const Activity = props => {
             </div>
         )
     }
-    else {
+    else if (activity["Skiing"]) {
         return (
             <div>
                 <SkiingActivity
