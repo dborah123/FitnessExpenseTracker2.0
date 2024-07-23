@@ -4,8 +4,10 @@ import { LuBike } from "react-icons/lu";
 import { FaSkiing, FaPlus } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import './styles/activity.css';
-import { EditExpense } from '../Expense/EditExpense';
+import { Expense } from '../Expense/Expense';
 import { useState } from 'react';
+
+
 
 
 export const Activity = props => {
@@ -134,7 +136,7 @@ export const Activity = props => {
             <div className="vert-flex-item">
                 <ExpenseList linkedActivity={activity.id} />
 
-                <EditExpense
+                <Expense
                     isVisible={isVisible}
                     addExpense={true}
                     linkedActivity={activity.id}
@@ -153,4 +155,3 @@ Activity.propTypes = {
         start_date_local: PropTypes.string,
     }),
 };
-

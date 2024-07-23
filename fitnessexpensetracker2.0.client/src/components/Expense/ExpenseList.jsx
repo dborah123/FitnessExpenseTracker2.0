@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { getExpenseListURL } from '../../libraryfunctions/urllib';
-import { Expense } from './Expense';
 import { useState, useEffect} from 'react'
+import { Expense } from './Expense';
 
 export const ExpenseList = props => {
 
@@ -21,7 +21,7 @@ export const ExpenseList = props => {
         <div>
             {expenseList ? expenseList.map(expense => (
                 <div key={expense.id}>
-                    <Expense expense={expense} useMockData={false} />
+                    <Expense isVisible={true} expense={expense} />
                 </div>
             )) : null}
         </div>
