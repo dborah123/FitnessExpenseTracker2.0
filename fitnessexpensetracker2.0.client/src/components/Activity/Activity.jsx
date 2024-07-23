@@ -124,15 +124,83 @@ export const MountainBikingActivity = props => {
 
 export const SkiingActivity = props => {
 
+
+    const [isVisible, setIsVisible] = useState(false);
+
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+    };
+
     let activity = props.activity;
 
-    return (
-        <div>
-            <FaSkiing />
-            <h3>{activity["name"]}</h3>
+    let activityType = activity["sport_type"];
 
-            <div>
-                <ExpenseList useMockData={true} />
+    if (activityType == "Ride") {
+        activityType = "Road Ride";
+    } else {
+        activityType = "Mountain Bike Ride"
+    }
+
+    let datetime = new Date(activity['start_date_local']);
+    let formattedDate = getFormattedDate(datetime);
+
+    return (
+        <div className="activity-header vert-flex-container">
+            <div className="flex-container vert-flex-item">
+                <div className="flex-item activity-icon" >
+                    <IconContext.Provider value={{ size: '50px' }}>
+                        <div>
+                            <FaSkiing />
+                        </div>
+                    </IconContext.Provider>
+                </div>
+                <div className="flex-item activity-info ">
+                    <div className="grid-container">
+                        <div className="grid-item grid-item-left-col">
+                            <h3 className="override">Activity Name: </h3>
+                        </div>
+                        <div className="grid-item">
+                            <h3 className="override">{activity["name"]}</h3>
+                        </div>
+                        <div className="grid-item grid-item-left-col">
+                            <h3 className="override">Type: </h3>
+                        </div>
+                        <div className="grid-item">
+                            <h3 className="override">{activityType}</h3>
+                        </div>
+                        <div className="grid-item grid-item-left-col">
+                            <h3 className="override">Date: </h3>
+                        </div>
+                        <div className="grid-item">
+                            <h3 className="override">{formattedDate}</h3>
+                        </div>
+                    </div>
+
+                </div>
+                <div className="flex-item flex-item-left">
+                    <button className="add-button btn-flex-container" onClick={toggleVisibility}>
+                        <div className="btn-flex-item">
+                            <IconContext.Provider value={{ size: '15px' }}>
+                                <div>
+                                    <FaPlus />
+                                </div>
+                            </IconContext.Provider>
+                        </div>
+                        <div className="btn-flex-item">
+                            Add
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div className="vert-flex-item">
+                <ExpenseList linkedActivity={activity.id} />
+
+                <EditExpense
+                    isVisible={isVisible}
+                    addExpense={true}
+                    linkedActivity={activity.id}
+                    toggleExpenseVisability={toggleVisibility}
+                />
             </div>
         </div>
     );
