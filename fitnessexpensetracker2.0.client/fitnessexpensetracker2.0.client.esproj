@@ -14,6 +14,7 @@
   <ItemGroup>
     <Folder Include="src\components\Header\" />
     <Folder Include="src\components\Login\styles\" />
+    <Folder Include="src\components\NewFolder\styles\" />
     <Folder Include="src\libraryfunctions\" />
   </ItemGroup>
 </Project>

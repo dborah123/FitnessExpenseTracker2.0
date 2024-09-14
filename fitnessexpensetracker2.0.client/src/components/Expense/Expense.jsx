@@ -253,8 +253,6 @@ export const Expense = (props) => {
     );
 }
 
-
-
 Expense.propTypes = {
     isVisible: PropTypes.bool,
     expense: PropTypes.object,

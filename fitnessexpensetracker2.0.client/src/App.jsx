@@ -1,10 +1,11 @@
 import './App.css';
 import { ActivityList } from './components/Activity/ActivityList';
 import { StravaLogin } from './components/Login/Login';
-import { Header } from './components/Header/Header';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { getRegisterClientURL } from './libraryfunctions/urllib';
+import { BrowserRouter, Routes } from 'react-router-dom';
+import { NavBar } from './components/NavBar/NavBar';
 
 function App() {
 
@@ -42,7 +43,11 @@ function App() {
 
     return (
         <div>
-            <Header />
+            <BrowserRouter>
+                <NavBar />
+                <Routes>
+                </Routes>
+            </BrowserRouter>
             {
                 isLoggedIn && athlete ? <ActivityList useMockData={false} athlete={athlete} />
                     : <StravaLogin />

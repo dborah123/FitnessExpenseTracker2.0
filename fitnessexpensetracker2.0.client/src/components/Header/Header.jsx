@@ -21,22 +21,5 @@ export const Header = () => {
                 </div>
             </div>
         </div>
-    )
-    /*
-    return (
-        <div className="flex-container">
-            <div className="flex-item">
-                <IconContext.Provider value={{ size: "3em" }}>
-                    <div>
-                        <FaMountain  />
-                    </div>
-                </IconContext.Provider>
-            </div>
-            <div className="flex-item">
-                <h1 >Fitness Expense Tracker</h1>
-            </div>
-            <div className="flex-item"></div>
-        </div>
     );
-    */
 }
