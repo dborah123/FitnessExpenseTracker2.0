@@ -43,15 +43,18 @@ function App() {
 
     return (
         <div>
-            <BrowserRouter>
-                <NavBar />
-                <Routes>
-                </Routes>
-            </BrowserRouter>
-            {
-                isLoggedIn && athlete ? <ActivityList useMockData={false} athlete={athlete} />
-                    : <StravaLogin />
-            }
+            <div className="vert-itm">
+                <BrowserRouter>
+                    <NavBar />
+                </BrowserRouter>
+            </div>
+            <div className="vert-itm">
+                {
+                    isLoggedIn && athlete ? <ActivityList useMockData={false} athlete={athlete} />
+                        : <StravaLogin />
+                }
+            </div>
+            
         </div>
     );
 }
