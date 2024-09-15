@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 import { getRegisterClientURL } from './libraryfunctions/urllib';
 import { BrowserRouter, Routes } from 'react-router-dom';
 import { NavBar } from './components/NavBar/NavBar';
+import { ActivityTypes } from './libraryfunctions/ActivityType';
 
 function App() {
 
@@ -15,8 +16,14 @@ function App() {
         return urlParams.get('code');
     }
 
+    const [filter, setFilter] = useState(ActivityTypes.Biking);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [athlete, setAthlete] = useState(false);
+
+    function filterCallback(filterStatus) {
+        setFilter(filterStatus);
+        console.log(filter);
+    }
 
     const code = getAccessCodeQueryParam();
 
@@ -45,7 +52,7 @@ function App() {
         <div>
             <div className="vert-itm">
                 <BrowserRouter>
-                    <NavBar />
+                    <NavBar filterCallback={filterCallback} />
                 </BrowserRouter>
             </div>
             <div className="vert-itm">

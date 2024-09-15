@@ -15,6 +15,7 @@
     <Folder Include="src\components\Header\" />
     <Folder Include="src\components\Login\styles\" />
     <Folder Include="src\components\NavBar\styles\" />
+    <Folder Include="src\components\Filter\" />
     <Folder Include="src\libraryfunctions\" />
   </ItemGroup>
 </Project>

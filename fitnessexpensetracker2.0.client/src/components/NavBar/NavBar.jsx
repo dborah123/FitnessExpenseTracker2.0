@@ -1,10 +1,12 @@
+import PropTypes from 'prop-types';
 import { FaMountain } from "react-icons/fa6";
 import { IconContext } from "react-icons";
-import { Nav, NavLink, NavLogo, Bars, NavMenu } from "./styles/NarBarStyle";
+import { Filter } from '../Filter/Filter';
+import { Nav, NavLink, NavLogo, NavMenu } from "./styles/NarBarStyle";
 import "./styles/NavBar.css"
 
 
-export const NavBar = () => {
+export const NavBar = (props) => {
     return (
         <>
             <Nav>
@@ -29,22 +31,21 @@ export const NavBar = () => {
                         to="/"
                         activestyle={{ color: 'black' }}
                     >
-                        Home
+                        Activities
                     </NavLink>
                     <NavLink
                         to="/about"
                         activestyle={{ color: 'black' }}
                     >
-                        About
+                        Statistics
                     </NavLink>
-                    <NavLink
-                        to="/contact"
-                        activestyle={{ color: 'black' }}
-                    >
-                        Contact
-                    </NavLink>
+                    <Filter filterCallback={props.filterCallback} />
                 </NavMenu>
             </Nav>
         </>
     );
+}
+
+NavBar.propTypes = {
+    filterCallback : PropTypes.func,
 }
