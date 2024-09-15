@@ -22,7 +22,7 @@ export const NavBar = () => {
                         </div>
                     </div>
                 </NavLogo>
-                <Bars />
+
 
                 <NavMenu>
                     <NavLink

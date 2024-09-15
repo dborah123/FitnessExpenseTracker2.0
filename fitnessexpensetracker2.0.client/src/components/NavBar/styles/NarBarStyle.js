@@ -10,10 +10,11 @@ export const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.2rem calc((100vw - 1000px) / 2);
+    padding: 0.2rem 0.5rem;
     z-index: 12;
 `;
 export const NavLogo = styled(Link)`
+  align-self: left;
   cursor: pointer;
   color: #fff;
   font-size: 1rem;
@@ -27,18 +28,18 @@ export const NavLogo = styled(Link)`
 `;
 
 export const NavLink = styled(Link)`
-color: #fff;
-display: flex;
-align-items: center;
-text-decoration: none;
-padding: 0 1rem;
-height: 100%;
-cursor: pointer;
-opacity: 0.9;
-transition: 0.3s;
-&:hover {
-  opacity: 1.0
-}
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: 0.3s;
+    &:hover {
+     opacity: 1.0
+    }
 `;
 
 export const Bars = styled(FaBars)`
