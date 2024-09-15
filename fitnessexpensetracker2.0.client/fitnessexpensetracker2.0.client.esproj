@@ -12,6 +12,7 @@
     <None Remove="tailwind.config.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="src\components\Activity\ActivityIcon\" />
     <Folder Include="src\components\NavBar\Filter\styles\" />
     <Folder Include="src\components\Header\" />
     <Folder Include="src\components\Login\styles\" />

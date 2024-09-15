@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { ExpenseList } from '../Expense/ExpenseList';
-import { LuBike } from "react-icons/lu";
-import { FaSkiing, FaPlus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import './styles/activity.css';
 import { Expense } from '../Expense/Expense';
 import { useState } from 'react';
-import { getActivityTypeName, StravaActivityTypes, isSupportedActivityType, StravaToInternal } from '../../libraryfunctions/ActivityType';
+import { getActivityTypeName, isSupportedActivityType, StravaToInternal } from '../../libraryfunctions/ActivityType';
+import { ActivityIcon } from './ActivityIcon/ActivityIcon';
 
 export const Activity = props => {
     /**
@@ -17,18 +17,6 @@ export const Activity = props => {
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
     };
-
-    const getActivityIcon = (activityType) => {
-        switch (activityType) {
-            case StravaActivityTypes.Ride:
-            case StravaActivityTypes.MTBRide:
-                return LuBike;
-            case StravaActivityTypes.Skiing:
-                return FaSkiing;
-            default:
-                return "";
-        }
-    }
 
     const shouldFilterActivity = (activityType, filterValue) => {
         return StravaToInternal(activityType) != filterValue;
@@ -62,17 +50,15 @@ export const Activity = props => {
 
     let activityTypeName = getActivityTypeName(activityType);
     let formattedDate = getFormattedDate(activity['start_date_local']);
-    const ActivityIcon = getActivityIcon(activityType);
 
     return (
         <div className="activity-header vert-flex-container">
             <div className="flex-container vert-flex-item">
                 <div className="flex-item activity-icon" >
-                    <IconContext.Provider value={{ size: '50px' }}>
-                        <div>
-                            <ActivityIcon />
-                        </div>
-                    </IconContext.Provider>
+                    <ActivityIcon
+                        activityType={activityType}
+                        values={{ size: '50px' }}
+                    />
                 </div>
                 <div className="flex-item activity-info ">
                     <div className="grid-container">
@@ -132,6 +118,6 @@ Activity.propTypes = {
         name: PropTypes.string,
         sport_type: PropTypes.string,
         start_date_local: PropTypes.string,
-        filterValue: PropTypes.number,
     }),
+    filterValue: PropTypes.number,
 };

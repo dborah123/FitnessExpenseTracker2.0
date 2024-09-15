@@ -16,7 +16,6 @@ export const NavLogo = styled(Link)`
   align-self: left;
   cursor: pointer;
   color: #fff;
-  font-size: 1rem;
   text-decoration: none;
   opacity: 0.9;
   transition: 0.3s;
