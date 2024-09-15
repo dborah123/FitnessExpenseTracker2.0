@@ -6,9 +6,7 @@ import { IconContext } from "react-icons";
 import './styles/activity.css';
 import { Expense } from '../Expense/Expense';
 import { useState } from 'react';
-
-
-
+import { getActivityTypeName, StravaActivityTypes, isSupportedActivityType, StravaToInternal } from '../../libraryfunctions/ActivityType';
 
 export const Activity = props => {
     /**
@@ -20,45 +18,20 @@ export const Activity = props => {
         setIsVisible(!isVisible);
     };
 
-    const isSupportedActivityType = (activityType) => {
-
-        switch (activityType) {
-            case "Ride":
-                return true;
-            case "MountainBikeRide":
-                return true;
-            case "Skiing":
-                return true;
-            default:
-                return false;
-
-        }
-    }
-
-    const getActivityTypeName = (activityType) => {
-        switch (activityType) {
-            case "Ride":
-                return "Road Ride";
-            case "MountainBikeRide":
-                return "Mountain Bike Ride";
-            case "Skiing":
-                return "Skiing";
-            default:
-                return "";
-        }
-    }
-
     const getActivityIcon = (activityType) => {
         switch (activityType) {
-            case "Ride":
+            case StravaActivityTypes.Ride:
+            case StravaActivityTypes.MTBRide:
                 return LuBike;
-            case "MountainBikeRide":
-                return LuBike;
-            case "Skiing":
+            case StravaActivityTypes.Skiing:
                 return FaSkiing;
             default:
                 return "";
         }
+    }
+
+    const shouldFilterActivity = (activityType, filterValue) => {
+        return StravaToInternal(activityType) != filterValue;
     }
 
     const getFormattedDate = (date) => {
@@ -77,7 +50,13 @@ export const Activity = props => {
     let activity = props.activity;
     let activityType = activity["sport_type"];
 
+    // If this isn't a supported activity type, exit
     if (!isSupportedActivityType(activityType)) {
+        return;
+    }
+
+    // If we should filter this activity type, exit
+    if (shouldFilterActivity(activityType, props.filterValue)) {
         return;
     }
 
@@ -153,5 +132,6 @@ Activity.propTypes = {
         name: PropTypes.string,
         sport_type: PropTypes.string,
         start_date_local: PropTypes.string,
+        filterValue: PropTypes.number,
     }),
 };

@@ -47,6 +47,7 @@ export const ActivityList = props => {
                         activity={activity}
                         refreshState={refresh}
                         refreshExpense={refresh}
+                        filterValue={props.filterValue}
                     />
                 </div>
             )) : null}
@@ -56,6 +57,7 @@ export const ActivityList = props => {
 
 ActivityList.propTypes = {
     athlete: PropTypes.object,
-    useMockData: PropTypes.bool
+    useMockData: PropTypes.bool,
+    filterValue: PropTypes.number,
 };
 

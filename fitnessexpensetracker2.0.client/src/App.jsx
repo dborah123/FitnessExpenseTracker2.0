@@ -21,8 +21,7 @@ function App() {
     const [athlete, setAthlete] = useState(false);
 
     function filterCallback(filterStatus) {
-        setFilter(filterStatus);
-        console.log(filter);
+        setFilter(Number(filterStatus));
     }
 
     const code = getAccessCodeQueryParam();
@@ -57,7 +56,7 @@ function App() {
             </div>
             <div className="vert-itm">
                 {
-                    isLoggedIn && athlete ? <ActivityList useMockData={false} athlete={athlete} />
+                    isLoggedIn && athlete ? <ActivityList useMockData={false} athlete={athlete} filterValue={filter} />
                         : <StravaLogin />
                 }
             </div>
