@@ -1,0 +1,74 @@
+.filter-flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.filter-flex-item {
+    align-self: center
+}
+
+.filter-group {
+    position: relative;
+    width: 50%;
+}
+
+.filter-field {
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-weight: 600;
+    opacity: 0.9;
+    transition: 0.3s;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    color: #fff;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.filter-field option {
+    background: #9b9b9b;
+}
+
+.filter-field::placeholder {
+    color: transparent;
+}
+
+.filter-field:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+}
+
+.filter-form {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #9b9b9b;
+}
+
+.filter-field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #11998e, #38ef7d);
+    border-image-slice: 1;
+}
+
+.filter-field:focus ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #11998e;
+    font-weight: 700;
+}
+
+/* reset input */
+.filter-field:required, .filter-field:invalid {
+    box-shadow: none;
+}

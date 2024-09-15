@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { ActivityTypes } from '../../libraryfunctions/ActivityType';
+import { ActivityTypes } from '../../../libraryfunctions/ActivityType';
+import './styles/filter.css';
 
 export const Filter = (props) => {
 
@@ -24,16 +25,21 @@ export const Filter = (props) => {
 
     return (
         <>
-            <div className="flex-item form__group field">
-                <label className="form__label" htmlFor="expenseType">Activity</label>
-                <select
-                    id="expenseType"
-                    name="expenseType"
-                    onChange={filterCallback}
-                >
-                    {activityTypeOptions}
-                </select>
+            <div className="filter-flex-container">
+                <div className="filter-flex-item filter-group">
+                    <select
+                        name="expenseType"
+                        onChange={filterCallback}
+                        className="filter-field"
+                    >
+                        {activityTypeOptions}
+                    </select>
+                </div>
+                <div className="flex-item">
+                LOGO
+                </div>
             </div>
+
         </>
     );
 }

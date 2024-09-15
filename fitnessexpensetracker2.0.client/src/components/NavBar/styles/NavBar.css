@@ -9,6 +9,9 @@
     padding-top: 12px;
 }
 
+.navbar-item {
+    font-size: 1.2rem;
+}
 
 .logo {
     display: flex;
