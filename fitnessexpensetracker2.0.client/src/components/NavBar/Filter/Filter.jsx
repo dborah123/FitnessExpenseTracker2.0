@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
-import { ActivityTypes } from '../../../libraryfunctions/ActivityType';
+import { ActivityTypes, InternalToStrava, StravaActivityTypes } from '../../../libraryfunctions/ActivityType';
 import './styles/filter.css';
+import { ActivityIcon } from '../../Activity/ActivityIcon/ActivityIcon'
+import { useState } from 'react';
 
 export const Filter = (props) => {
 
@@ -19,7 +21,10 @@ export const Filter = (props) => {
 
     const filterCallback = (event) => {
         props.filterCallback(event.target.value);
+        setSelection(InternalToStrava(Number(event.target.value)));
     }
+
+    const [selection, setSelection] = useState(StravaActivityTypes.Ride);
 
     const activityTypeOptions = generateActivityTypeOptions();
 
@@ -28,7 +33,7 @@ export const Filter = (props) => {
             <div className="filter-flex-container">
                 <div className="filter-flex-item filter-group">
                     <select
-                        name="expenseType"
+                        name="activityType"
                         onChange={filterCallback}
                         className="filter-field"
                     >
@@ -36,7 +41,10 @@ export const Filter = (props) => {
                     </select>
                 </div>
                 <div className="flex-item">
-                LOGO
+                    <ActivityIcon
+                        activityType={selection}
+                        values={{ size: '50px' }}
+                    />
                 </div>
             </div>
 
