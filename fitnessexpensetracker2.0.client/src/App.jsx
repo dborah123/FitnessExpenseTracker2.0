@@ -4,9 +4,12 @@ import { StravaLogin } from './components/Login/Login';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { getRegisterClientURL } from './libraryfunctions/urllib';
-import { BrowserRouter, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { NavBar } from './components/NavBar/NavBar';
 import { ActivityTypes } from './libraryfunctions/ActivityType';
+import { StatisticsTab } from './components/Statistics/StatisticsTab';
+
+
 
 function App() {
 
@@ -45,24 +48,33 @@ function App() {
         }
 
         return () => effectRan.current = true;
-    }, []);
+    }, [code, isLoggedIn]);
 
     return (
-        <div>
+        <Router> 
+            <div className="vert-itm"> 
+                <NavBar filterCallback={filterCallback} /> 
+            </div> 
             <div className="vert-itm">
-                <BrowserRouter>
-                    <NavBar filterCallback={filterCallback} />
-                </BrowserRouter>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={(isLoggedIn && athlete) ? (
+                                <ActivityList useMockData={false} athlete={athlete} filterValue={filter} />
+                            ) : (
+                                <StravaLogin />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/statistics"
+                        element={<StatisticsTab />}
+                    />
+                </Routes>
             </div>
-            <div className="vert-itm">
-                {
-                    isLoggedIn && athlete ? <ActivityList useMockData={false} athlete={athlete} filterValue={filter} />
-                        : <StravaLogin />
-                }
-            </div>
-            
-        </div>
+        </Router>
     );
 }
+
 
 export default App;

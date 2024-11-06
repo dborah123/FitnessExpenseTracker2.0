@@ -20,8 +20,7 @@ export const ActivityList = props => {
 
         if (!effectRan.current
             && activities == false
-            && accessToken != null 
-            && !props.useMockData) {
+            && accessToken != null) {
 
             axios.get(getStravaActivitiesURL(accessToken)).then(response => {
 
@@ -33,7 +32,7 @@ export const ActivityList = props => {
         }
 
         return () => effectRan.current = true;
-    })
+    }, [activities, props.athlete.access_token, setActivities]);
 
     const refresh = useCallback(val => {
         setShouldRefresh(val);

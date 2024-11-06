@@ -34,7 +34,7 @@ export const NavBar = (props) => {
                         Activities
                     </NavLink>
                     <NavLink
-                        to="/about"
+                        to="/statistics"
                         className="navbar-item"
                     >
                         Statistics
