@@ -32,6 +32,10 @@ function App() {
     const effectRan = useRef(false);
 
     useEffect(() => {
+        document.title = "Fitness Expense Tracker";
+    }, []);
+
+    useEffect(() => {
 
         if (!effectRan.current && code != null && !isLoggedIn) {
             axios.get(getRegisterClientURL(code)).then(response => {
