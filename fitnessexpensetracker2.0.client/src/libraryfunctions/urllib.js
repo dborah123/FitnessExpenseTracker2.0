@@ -1,6 +1,6 @@
 const stravaBaseUrl = "https://www.strava.com/api/v3";
-const expenseBaseUrl = "https://localhost:7241/api/Expenses/"
-const registerBaseUrl = "https://localhost:7241/api/Register/"
+const expenseBaseUrl = "https://localhost:32771/api/Expenses/"
+const registerBaseUrl = "https://localhost:32771/api/Register/"
 
 /**
  * STRAVA AUTH
@@ -40,11 +40,8 @@ export function getExpenseListURL(activity) {
 
     let urlString = expenseBaseUrl;
 
-    if (activity != null) {
+    if (activity !== undefined) {
         urlString = urlString + "activity/" + activity;
-    }
-    else {
-        return null;
     }
 
     return urlString;

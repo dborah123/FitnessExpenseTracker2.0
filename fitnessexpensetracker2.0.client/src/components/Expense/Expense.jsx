@@ -8,6 +8,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import { GiCancel } from "react-icons/gi";
 import { IconContext } from "react-icons";
 import { useState } from 'react';
+import { getExpenseListURL } from '../../libraryfunctions/urllib';
 
 export const Expense = (props) => {
     /**
@@ -97,7 +98,7 @@ export const Expense = (props) => {
             values.stravaUserID = "123";
 
             if (props.addExpense) {
-                axios.post('https://localhost:7241/api/Expenses/', values, {
+                axios.post(getExpenseListURL(), values, {
                     headers: {
                         "Content-Type": "application/json",
                     },
